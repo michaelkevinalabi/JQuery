@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    console.log('We are ready!');
+  $('body').html('<strong>Hello world!</strong>');
 });
