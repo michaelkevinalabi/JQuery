@@ -1,8 +1,6 @@
 $(document).ready(function(){
-    $('#container')
-        .find('.hot')
-        .children()
-        .last()
-        .prev()
-        .addClass('highlight');
+    $('#snow')
+      .parent()
+      .find('.title')
+      .addClass('highlight');
 });
