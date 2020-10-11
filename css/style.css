@@ -11,8 +11,11 @@ body{
 
 .item{
     width: 200px;
-    padding: 8px;
     background-color: #DDD;
+    padding: 8px;
+    float: left;
+    margin-right: 4px;
+
 }
 
 .item img{
