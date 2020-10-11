@@ -1,3 +1,8 @@
 $(document).ready(function(){
-  $('#container input[placeholder*=Name]').addClass('highlight');
+    $('#container')
+        .find('.hot')
+        .children()
+        .last()
+        .prev()
+        .addClass('highlight');
 });
