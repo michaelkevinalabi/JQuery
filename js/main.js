@@ -1,6 +1,5 @@
 $(document).ready(function(){
-    $('#snow')
-      .parent()
-      .find('.title')
-      .addClass('highlight');
+  $('.box').on('click',function(){
+    $(this).toggleClass('highlight');
+  });
 });
