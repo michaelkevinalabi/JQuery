@@ -1,3 +1,5 @@
+var cart = 0;
+
 function addItem(id, name, description, price, moreInfo) {
   let html = '';
   html += '<div class="item" data-id="' + id + '">';
@@ -45,5 +47,25 @@ function addItem(id, name, description, price, moreInfo) {
         })
         .always(function(){
         
-    })
+    });
+        
+        $('#container').on('click','.item-add',function(){
+            let id = $(this).parent().data('id');
+             $.ajax('data/addToCart.json', {
+      type: 'post',
+      data: { id: id },
+      dataType: 'json',
+      contentType: 'application/json'
+        })
+            .done(function(response){
+        if (response.message === 'success'){
+            let price = response.price;
+
+            cart += price;
+        
+        $('#cart-container').text('$' + cart);
+        }
+                  
+         });
+    });
 });
