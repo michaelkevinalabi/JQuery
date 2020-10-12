@@ -1,24 +1,21 @@
-$(document).ready(function(){
-$('#button-create-item').on('click',function(){
-    let name = $('#input-create-item').val();
-    $('#input-create-item').val('');
+function addItem(id, name, description, price, moreInfo) {
+  let html = '';
+  html += '<div class="item" data-id="' + id + '">';
+  html += '<div class="name">' + name + '</div>';
+  html += '<img src="assets/house.jpg"></img>';
+  html += '<div class="description">' + description + '</div>';
+  html += '<div class="price">' + price + '</div>';
+  html += '<button class="item-add">Add to cart</button>';
+  html += '<button class="item-remove">Remove</button>';
+  html += '<br/>';
+  html += '<a class="more-info-link" href="#">More info</a>';
+  html += '<div class="more-info">' + moreInfo + '</div>';
+  html += '</div>';
+
+    $('#container').prepend(html);  
+}
     
-    let html= '';
-     html += '<div class="item">';
-         html += '<div class="name">' + name +'</div>';
-          html += '<img src="assets/house.jpg"></img>';
-        html += ' <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>';
-         html += '<div class="price">499</div>';
-         html += '<button class="item-add">Add to cart</button>';
-         html += '<button class="item-remove">Remove</button>';
-         html += '<br>';
-         html += '<a class="more-info-link" href="#">More info</a>';
-         html += '<div class="more-info">Lorem ipsum dolor sit amet</div>';
-        html += '</div>';
-    
-    $('#container').prepend(html);
-});
-    
+    $(document).ready(function(){
     $('#container').on('click','.more-info-link',function(event){
         event.preventDefault();
         
@@ -31,4 +28,22 @@ $('#button-create-item').on('click',function(){
      $('#container').on('click','.item-remove',function(){
         $(this).parent().remove();
     });
+    
+    $.ajax('data/item.json', {
+    DataType: 'json',
+    contentType: 'application/json',
+    cache: false
+    })
+        .done(function(respnse){
+        let items = respnse.items;
+        items.forEach(function(item){
+      addItem(item.name, item.description, item.price, item.moreInfo);
+        });
+    })
+        .fail(function(request, errorType, errorMessage){
+        console.log(errorMessage);
+        })
+        .always(function(){
+        
+    })
 });
